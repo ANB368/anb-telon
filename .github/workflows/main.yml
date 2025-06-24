@@ -20,14 +20,14 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-       - name: Make gradlew executable
-         run: chmod +x android/gradlew
-         working-directory: telon-gateway-app
+      - name: Make gradlew executable
+        run: chmod +x android/gradlew
+        working-directory: telon-gateway-app
 
-       - name: Upgrade Gradle Wrapper to 7.6.4
-         run: ./android/gradlew wrapper --gradle-version 7.6.4 --distribution-type all
-         working-directory: telon-gateway-app
-  
+      - name: Upgrade Gradle Wrapper to 7.6.4
+        run: ./android/gradlew wrapper --gradle-version 7.6.4 --distribution-type all
+        working-directory: telon-gateway-app
+
       - name: Setup Node.js 16
         uses: actions/setup-node@v3
         with:
@@ -65,7 +65,6 @@ jobs:
       - name: Build Android App Bundle
         run: |
           cd android
-          chmod +x gradlew
           ./gradlew clean
           ./gradlew bundleRelease -Pkeystore.password=${{ secrets.KEYSTORE_PASSWORD }}
         working-directory: telon-gateway-app
@@ -75,4 +74,3 @@ jobs:
         with:
           name: android-bundle
           path: telon-gateway-app/android/app/build/outputs/bundle/release/app-release.aab
-
