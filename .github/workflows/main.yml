@@ -66,8 +66,9 @@ jobs:
           ./gradlew bundleRelease -Pkeystore.password=${{ secrets.KEYSTORE_PASSWORD }}
         working-directory: telon-gateway-app
 
-      - name: Upload Android App Bundle
-        uses: actions/upload-artifact@v3
+      - name: Save Bundle as Artifact
+        uses: actions/upload-artifact@v4
         with:
           name: android-bundle
           path: telon-gateway-app/android/app/build/outputs/bundle/release/app-release.aab
+
